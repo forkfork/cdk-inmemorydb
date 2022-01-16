@@ -19,6 +19,7 @@ import { RedisDB } from 'cdk-redisdb'
 
 new RedisDB(this, 'redisdb-repl-group', {
   nodes: 1,
+  nodeType: 'cache.m6g.large',
   engineVersion: '6.2',
 }
 ```
@@ -30,6 +31,7 @@ import { MemoryDB } from 'cdk-redisdb'
 
 new MemoryDB(this, 'memorydb-repl-group', {
   nodes: 1,
+  nodeType: 'db.t4g.small',
   engineVersion: '6.2',
 }
 ```

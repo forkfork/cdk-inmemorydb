@@ -15,6 +15,7 @@ export interface RedisDBProps extends StackProps {
   readonly engineVersion?: string;
   //readonly memoryAutoscalingTarget?: number;
   readonly nodes?: number;
+  readonly nodeType?: string;
 }
 
 function setupVpc(parent: any, props: RedisDBProps) : ec2.IVpc {
@@ -56,7 +57,7 @@ export class RedisDB extends Construct {
     let elasticacheReplicationGroupName = id + '-RedisDB';
     let redis_cluster = new elasticache.CfnReplicationGroup(this, elasticacheReplicationGroupName, {
       numNodeGroups: props.nodes || 1,
-      cacheNodeType: 'cache.m6g.large',
+      cacheNodeType: props.nodeType || 'cache.m6g.large',
       engine: 'Redis',
       multiAzEnabled: false,
       autoMinorVersionUpgrade: false,
@@ -121,7 +122,7 @@ export class MemoryDB extends Construct {
     const memorydb_cluster = new memorydb.CfnCluster(this, 'memorydb', {
       aclName: 'open-access',
       clusterName: 'clustername',
-      nodeType: 'db.t4g.small',
+      nodeType: props.nodeType || 'db.t4g.small',
 
       autoMinorVersionUpgrade: false,
       description: 'description',

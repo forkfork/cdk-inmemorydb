@@ -1,5 +1,6 @@
 {
   "name": "cdk-redisdb",
+  "description": "Simple & featureful Redis on AWS - Elasticache Replication Group & MemoryDB with a unified API",
   "repository": {
     "type": "git",
     "url": "https://github.com/timothydowns/cdk-redisdb.git"

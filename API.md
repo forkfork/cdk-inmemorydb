@@ -109,6 +109,7 @@ const redisDBProps: RedisDBProps = { ... }
 | [`engineVersion`](#cdkredisdbredisdbpropspropertyengineversion) | `string` | *No description.* |
 | [`existingVpc`](#cdkredisdbredisdbpropspropertyexistingvpc) | [`aws-cdk-lib.aws_ec2.IVpc`](#aws-cdk-lib.aws_ec2.IVpc) | *No description.* |
 | [`nodes`](#cdkredisdbredisdbpropspropertynodes) | `number` | *No description.* |
+| [`nodeType`](#cdkredisdbredisdbpropspropertynodetype) | `string` | *No description.* |
 | [`transitEncryptionEnabled`](#cdkredisdbredisdbpropspropertytransitencryptionenabled) | `boolean` \| [`aws-cdk-lib.IResolvable`](#aws-cdk-lib.IResolvable) | *No description.* |
 
 ---
@@ -243,6 +244,16 @@ public readonly nodes: number;
 ```
 
 - *Type:* `number`
+
+---
+
+##### `nodeType`<sup>Optional</sup> <a name="cdk-redisdb.RedisDBProps.property.nodeType" id="cdkredisdbredisdbpropspropertynodetype"></a>
+
+```typescript
+public readonly nodeType: string;
+```
+
+- *Type:* `string`
 
 ---
 

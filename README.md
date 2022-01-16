@@ -62,6 +62,7 @@ new RedisDB(this, 'redis-use-existing-vpc', {
 Features in progress:
 
 * Autoscaling (working locally, but struggling with JSII - commented out)
+* MemoryDB ACLs (commented out to avoid default bad practices, read comments to understand the CloudFormation)
 
 Features to come:
 

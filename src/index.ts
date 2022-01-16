@@ -2,7 +2,7 @@ import {
   aws_elasticache as elasticache,
   aws_memorydb as memorydb,
   aws_ec2 as ec2,
-  //aws_applicationautoscaling as appscaling,
+  aws_applicationautoscaling as appscaling,
   StackProps,
   IResolvable,
 } from 'aws-cdk-lib';
@@ -13,9 +13,10 @@ export interface RedisDBProps extends StackProps {
   readonly atRestEncryptionEnabled?: boolean | IResolvable;
   readonly transitEncryptionEnabled?: boolean | IResolvable;
   readonly engineVersion?: string;
-  //readonly memoryAutoscalingTarget?: number;
+  readonly memoryAutoscalingTarget?: number;
   readonly nodes?: number;
   readonly nodeType?: string;
+  readonly replicas?: number;
 }
 
 function setupVpc(parent: any, props: RedisDBProps) : ec2.IVpc {
@@ -68,10 +69,9 @@ export class RedisDB extends Construct {
       replicationGroupDescription: 'RedisDB setup by CDK',
       atRestEncryptionEnabled: props.atRestEncryptionEnabled,
       transitEncryptionEnabled: props.transitEncryptionEnabled,
-      replicasPerNodeGroup: 0,
+      replicasPerNodeGroup: props.replicas || 0,
     });
     redis_cluster.node.addDependency(ecSubnetGroup);
-    /*
     if (typeof props.memoryAutoscalingTarget == 'number') {
       const target = new appscaling.ScalableTarget(this, 'ScalableTarget', {
         serviceNamespace: appscaling.ServiceNamespace.ELASTICACHE,
@@ -85,7 +85,6 @@ export class RedisDB extends Construct {
         predefinedMetric: appscaling.PredefinedMetric.ELASTICACHE_DATABASE_MEMORY_USAGE_COUNTED_FOR_EVICT_PERCENTAGE,
       });
     }
-    */
   }
 }
 
@@ -127,8 +126,8 @@ export class MemoryDB extends Construct {
       autoMinorVersionUpgrade: false,
       description: 'description',
       engineVersion: props.engineVersion ?? '6.2',
-      numReplicasPerShard: 0,
       numShards: props.nodes||1,
+      numReplicasPerShard: props.replicas||0,
       securityGroupIds: [ecSecurityGroup.securityGroupId],
       subnetGroupName: ecSubnetGroup.subnetGroupName,
       tlsEnabled: true,

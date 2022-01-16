@@ -2,7 +2,7 @@ const { awscdk } = require('projen');
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Timothy Downs',
   authorAddress: 'timothydowns@gmail.com',
-  cdkVersion: '2.1.0',
+  cdkVersion: '2.8.0',
   defaultReleaseBranch: 'main',
   name: 'cdk-redisdb',
   repositoryUrl: 'https://github.com/timothydowns/cdk-redisdb.git',

@@ -108,8 +108,10 @@ const redisDBProps: RedisDBProps = { ... }
 | [`atRestEncryptionEnabled`](#cdkredisdbredisdbpropspropertyatrestencryptionenabled) | `boolean` \| [`aws-cdk-lib.IResolvable`](#aws-cdk-lib.IResolvable) | *No description.* |
 | [`engineVersion`](#cdkredisdbredisdbpropspropertyengineversion) | `string` | *No description.* |
 | [`existingVpc`](#cdkredisdbredisdbpropspropertyexistingvpc) | [`aws-cdk-lib.aws_ec2.IVpc`](#aws-cdk-lib.aws_ec2.IVpc) | *No description.* |
+| [`memoryAutoscalingTarget`](#cdkredisdbredisdbpropspropertymemoryautoscalingtarget) | `number` | *No description.* |
 | [`nodes`](#cdkredisdbredisdbpropspropertynodes) | `number` | *No description.* |
 | [`nodeType`](#cdkredisdbredisdbpropspropertynodetype) | `string` | *No description.* |
+| [`replicas`](#cdkredisdbredisdbpropspropertyreplicas) | `number` | *No description.* |
 | [`transitEncryptionEnabled`](#cdkredisdbredisdbpropspropertytransitencryptionenabled) | `boolean` \| [`aws-cdk-lib.IResolvable`](#aws-cdk-lib.IResolvable) | *No description.* |
 
 ---
@@ -237,6 +239,16 @@ public readonly existingVpc: IVpc;
 
 ---
 
+##### `memoryAutoscalingTarget`<sup>Optional</sup> <a name="cdk-redisdb.RedisDBProps.property.memoryAutoscalingTarget" id="cdkredisdbredisdbpropspropertymemoryautoscalingtarget"></a>
+
+```typescript
+public readonly memoryAutoscalingTarget: number;
+```
+
+- *Type:* `number`
+
+---
+
 ##### `nodes`<sup>Optional</sup> <a name="cdk-redisdb.RedisDBProps.property.nodes" id="cdkredisdbredisdbpropspropertynodes"></a>
 
 ```typescript
@@ -254,6 +266,16 @@ public readonly nodeType: string;
 ```
 
 - *Type:* `string`
+
+---
+
+##### `replicas`<sup>Optional</sup> <a name="cdk-redisdb.RedisDBProps.property.replicas" id="cdkredisdbredisdbpropspropertyreplicas"></a>
+
+```typescript
+public readonly replicas: number;
+```
+
+- *Type:* `number`
 
 ---
 

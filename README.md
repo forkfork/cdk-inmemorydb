@@ -58,3 +58,12 @@ new RedisDB(this, 'redis-use-existing-vpc', {
   existingVpc: vpc,
 })
 ```
+
+Features in progress:
+
+* Autoscaling (working locally, but struggling with JSII - commented out)
+
+Features to come:
+
+* Replication Groups with cluster mode disabled (for those using multiple databases)
+* Improved API - sane choice of props

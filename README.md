@@ -1,6 +1,6 @@
 # cdk-redisdb
 
-An AWS CDK construct which spins up an Elasticache Replication Group, or a MemoryDB Cluster.
+An AWS CDK construct which spins up an Elasticache Replication Group, or a MemoryDB Cluster. API still in flux as in fairly early development - pin against a specific version.
 
 __SECURITY NOTE__: This construct is still in development, please carefully review the resources created before using this in production.
 
@@ -61,9 +61,22 @@ new RedisDB(this, 'redis-use-existing-vpc', {
 })
 ```
 
+Add 2 replicas per node, and add shards to cluster when memory exceeds 60%.
+
+```ts
+import { RedisDB } from 'cdk-redisdb'
+
+new RedisDB(this, 'redisdb-repl-group', {
+  nodes: 1,
+  replicas: 2, // 2 replicas per node
+  nodeType: 'cache.m6g.large',
+  memoryAutoscalingTarget: 60,
+}
+```
+
 Features in progress:
 
-* Autoscaling (working locally, but struggling with JSII - commented out)
+* Replica Autoscaling (and CPU-based autoscaling rather than just Memory-based)
 * MemoryDB ACLs (commented out to avoid default bad practices, read comments to understand the CloudFormation)
 
 Features to come:

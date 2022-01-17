@@ -5,7 +5,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   cdkVersion: '2.8.0',
   defaultReleaseBranch: 'main',
   name: 'cdk-redisdb',
-  repositoryUrl: 'https://github.com/timothydowns/cdk-redisdb.git',
+  repositoryUrl: 'https://github.com/forkfork/cdk-redisdb.git',
 
   deps: [], /* Runtime dependencies of this module. */
   description: 'Simple & featureful Redis on AWS - Elasticache Replication Group & MemoryDB with a unified API',

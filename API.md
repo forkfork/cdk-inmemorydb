@@ -40,6 +40,23 @@ new MemoryDB(scope: Construct, id: string, props?: RedisDBProps)
 
 
 
+#### Properties <a name="Properties" id="properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`cluster`](#cdkredisdbmemorydbpropertycluster)<span title="Required">*</span> | [`aws-cdk-lib.aws_memorydb.CfnCluster`](#aws-cdk-lib.aws_memorydb.CfnCluster) | *No description.* |
+
+---
+
+##### `cluster`<sup>Required</sup> <a name="cdk-redisdb.MemoryDB.property.cluster" id="cdkredisdbmemorydbpropertycluster"></a>
+
+```typescript
+public readonly cluster: CfnCluster;
+```
+
+- *Type:* [`aws-cdk-lib.aws_memorydb.CfnCluster`](#aws-cdk-lib.aws_memorydb.CfnCluster)
+
+---
 
 
 ### RedisDB <a name="cdk-redisdb.RedisDB" id="cdkredisdbredisdb"></a>
@@ -80,6 +97,23 @@ new RedisDB(scope: Construct, id: string, props?: RedisDBProps)
 
 
 
+#### Properties <a name="Properties" id="properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| [`replicationGroup`](#cdkredisdbredisdbpropertyreplicationgroup)<span title="Required">*</span> | [`aws-cdk-lib.aws_elasticache.CfnReplicationGroup`](#aws-cdk-lib.aws_elasticache.CfnReplicationGroup) | *No description.* |
+
+---
+
+##### `replicationGroup`<sup>Required</sup> <a name="cdk-redisdb.RedisDB.property.replicationGroup" id="cdkredisdbredisdbpropertyreplicationgroup"></a>
+
+```typescript
+public readonly replicationGroup: CfnReplicationGroup;
+```
+
+- *Type:* [`aws-cdk-lib.aws_elasticache.CfnReplicationGroup`](#aws-cdk-lib.aws_elasticache.CfnReplicationGroup)
+
+---
 
 
 ## Structs <a name="Structs" id="structs"></a>
@@ -110,8 +144,10 @@ const redisDBProps: RedisDBProps = { ... }
 | [`existingVpc`](#cdkredisdbredisdbpropspropertyexistingvpc) | [`aws-cdk-lib.aws_ec2.IVpc`](#aws-cdk-lib.aws_ec2.IVpc) | *No description.* |
 | [`memoryAutoscalingTarget`](#cdkredisdbredisdbpropspropertymemoryautoscalingtarget) | `number` | *No description.* |
 | [`nodes`](#cdkredisdbredisdbpropspropertynodes) | `number` | *No description.* |
+| [`nodesCpuAutoscalingTarget`](#cdkredisdbredisdbpropspropertynodescpuautoscalingtarget) | `number` | *No description.* |
 | [`nodeType`](#cdkredisdbredisdbpropspropertynodetype) | `string` | *No description.* |
 | [`replicas`](#cdkredisdbredisdbpropspropertyreplicas) | `number` | *No description.* |
+| [`replicasCpuAutoscalingTarget`](#cdkredisdbredisdbpropspropertyreplicascpuautoscalingtarget) | `number` | *No description.* |
 | [`transitEncryptionEnabled`](#cdkredisdbredisdbpropspropertytransitencryptionenabled) | `boolean` \| [`aws-cdk-lib.IResolvable`](#aws-cdk-lib.IResolvable) | *No description.* |
 
 ---
@@ -259,6 +295,16 @@ public readonly nodes: number;
 
 ---
 
+##### `nodesCpuAutoscalingTarget`<sup>Optional</sup> <a name="cdk-redisdb.RedisDBProps.property.nodesCpuAutoscalingTarget" id="cdkredisdbredisdbpropspropertynodescpuautoscalingtarget"></a>
+
+```typescript
+public readonly nodesCpuAutoscalingTarget: number;
+```
+
+- *Type:* `number`
+
+---
+
 ##### `nodeType`<sup>Optional</sup> <a name="cdk-redisdb.RedisDBProps.property.nodeType" id="cdkredisdbredisdbpropspropertynodetype"></a>
 
 ```typescript
@@ -273,6 +319,16 @@ public readonly nodeType: string;
 
 ```typescript
 public readonly replicas: number;
+```
+
+- *Type:* `number`
+
+---
+
+##### `replicasCpuAutoscalingTarget`<sup>Optional</sup> <a name="cdk-redisdb.RedisDBProps.property.replicasCpuAutoscalingTarget" id="cdkredisdbredisdbpropspropertyreplicascpuautoscalingtarget"></a>
+
+```typescript
+public readonly replicasCpuAutoscalingTarget: number;
 ```
 
 - *Type:* `number`

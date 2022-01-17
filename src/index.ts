@@ -14,6 +14,8 @@ export interface RedisDBProps extends StackProps {
   readonly transitEncryptionEnabled?: boolean | IResolvable;
   readonly engineVersion?: string;
   readonly memoryAutoscalingTarget?: number;
+  readonly replicasCpuAutoscalingTarget?: number;
+  readonly nodesCpuAutoscalingTarget?: number;
   readonly nodes?: number;
   readonly nodeType?: string;
   readonly replicas?: number;
@@ -37,6 +39,7 @@ function setupVpc(parent: any, props: RedisDBProps) : ec2.IVpc {
 }
 
 export class RedisDB extends Construct {
+  public readonly replicationGroup : elasticache.CfnReplicationGroup;
   constructor(scope: Construct, id: string, props: RedisDBProps = {}) {
     super(scope, id);
 
@@ -71,6 +74,7 @@ export class RedisDB extends Construct {
       transitEncryptionEnabled: props.transitEncryptionEnabled,
       replicasPerNodeGroup: props.replicas || 0,
     });
+    this.replicationGroup = redis_cluster;
     redis_cluster.node.addDependency(ecSubnetGroup);
     if (typeof props.memoryAutoscalingTarget == 'number') {
       const target = new appscaling.ScalableTarget(this, 'ScalableTarget', {
@@ -84,11 +88,36 @@ export class RedisDB extends Construct {
         targetValue: props.memoryAutoscalingTarget,
         predefinedMetric: appscaling.PredefinedMetric.ELASTICACHE_DATABASE_MEMORY_USAGE_COUNTED_FOR_EVICT_PERCENTAGE,
       });
+    } else if (typeof props.replicasCpuAutoscalingTarget == 'number') {
+      const target = new appscaling.ScalableTarget(this, 'ScalableTarget', {
+        serviceNamespace: appscaling.ServiceNamespace.ELASTICACHE,
+        resourceId: 'replication-group/' + redis_cluster.ref,
+        scalableDimension: 'elasticache:replication-group:group:Replicas',
+        maxCapacity: props.nodes||1 *3,
+        minCapacity: props.nodes||1,
+      });
+      target.scaleToTrackMetric('CpuTracking', {
+        targetValue: props.replicasCpuAutoscalingTarget,
+        predefinedMetric: appscaling.PredefinedMetric.ELASTICACHE_PRIMARY_ENGINE_CPU_UTILIZATION,
+      });
+    } else if (typeof props.nodesCpuAutoscalingTarget == 'number') {
+      const target = new appscaling.ScalableTarget(this, 'ScalableTarget', {
+        serviceNamespace: appscaling.ServiceNamespace.ELASTICACHE,
+        resourceId: 'replication-group/' + redis_cluster.ref,
+        scalableDimension: 'elasticache:replication-group:NodeGroups',
+        maxCapacity: props.nodes||1 *3,
+        minCapacity: props.nodes||1,
+      });
+      target.scaleToTrackMetric('CpuTracking', {
+        targetValue: props.nodesCpuAutoscalingTarget,
+        predefinedMetric: appscaling.PredefinedMetric.ELASTICACHE_PRIMARY_ENGINE_CPU_UTILIZATION,
+      });
     }
   }
 }
 
 export class MemoryDB extends Construct {
+  public readonly cluster : memorydb.CfnCluster;
   constructor(scope: Construct, id: string, props: RedisDBProps = {}) {
     super(scope, id);
     let isolatedSubnets: string[] = [];
@@ -133,6 +162,7 @@ export class MemoryDB extends Construct {
       tlsEnabled: true,
     });
     memorydb_cluster.node.addDependency(ecSubnetGroup);
+    this.cluster = memorydb_cluster;
     //memorydb_cluster.node.addDependency(cfnACL);
     //cfnACL.node.addDependency(cfnUser);
   }

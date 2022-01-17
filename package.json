@@ -3,7 +3,7 @@
   "description": "Simple & featureful Redis on AWS - Elasticache Replication Group & MemoryDB with a unified API",
   "repository": {
     "type": "git",
-    "url": "https://github.com/timothydowns/cdk-redisdb.git"
+    "url": "https://github.com/forkfork/cdk-redisdb.git"
   },
   "scripts": {
     "build": "npx projen build",

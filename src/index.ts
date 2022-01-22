@@ -10,6 +10,7 @@ import { Construct } from 'constructs';
 
 export interface RedisDBProps extends StackProps {
   readonly existingVpc?: ec2.IVpc;
+  readonly existingSecurityGroup?: ec2.ISecurityGroup;
   readonly atRestEncryptionEnabled?: boolean | IResolvable;
   readonly transitEncryptionEnabled?: boolean | IResolvable;
   readonly engineVersion?: string;
@@ -48,7 +49,12 @@ export class RedisDB extends Construct {
     redisVpc.isolatedSubnets.forEach(function(value) {
       isolatedSubnets.push(value.subnetId);
     });
-    const ecSecurityGroup = new ec2.SecurityGroup(this, id + '-RedisDB-SG', {
+    if(isolatedSubnets.length == 0) {
+      redisVpc.privateSubnets.forEach(function(value) {
+        isolatedSubnets.push(value.subnetId);
+      });
+    }
+    const ecSecurityGroup = props.existingSecurityGroup ?? new ec2.SecurityGroup(this, id + '-RedisDB-SG', {
       vpc: redisVpc,
       description: 'SecurityGroup associated with RedisDB Cluster ' + id,
       allowAllOutbound: false,
@@ -125,7 +131,7 @@ export class MemoryDB extends Construct {
     redisVpc.isolatedSubnets.forEach(function(value) {
       isolatedSubnets.push(value.subnetId);
     });
-    const ecSecurityGroup = new ec2.SecurityGroup(this, id + '-RedisDB-SG', {
+    const ecSecurityGroup = props.existingSecurityGroup ?? new ec2.SecurityGroup(this, id + '-RedisDB-SG', {
       vpc: redisVpc,
       description: 'SecurityGroup associated with RedisDB Cluster ' + id,
       allowAllOutbound: false,

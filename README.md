@@ -74,9 +74,41 @@ new RedisDB(this, 'redisdb-repl-group', {
 }
 ```
 
+```ts
+import { RedisDB } from 'cdk-redisdb'
+
+let vpc = new ec2.Vpc(this, 'Vpc', {
+  subnetConfiguration: [
+    {
+      cidrMask: 24,
+      name: 'public1',
+      subnetType: ec2.SubnetType.PUBLIC,
+    },
+    {
+      cidrMask: 24,
+      name: 'isolated1',
+      subnetType: ec2.SubnetType.PRIVATE,
+    },
+  ],
+})
+
+const ecSecurityGroup = new ec2.SecurityGroup(this, 'elasticache-sg', {
+  vpc: vpc,
+  description: 'SecurityGroup associated with the ElastiCache Redis Cluster',
+  allowAllOutbound: false,
+});
+
+new RedisDB(this, 'redisdb-repl-group', {
+  nodes: 1,
+  nodeType: 'cache.m6g.large',
+  nodesCpuAutoscalingTarget: 50,
+  existingVpc: vpc,
+  existingSecurityGroup: ecSecurityGroup,
+}
+```
+
 Features in progress:
 
-* Replica Autoscaling (and CPU-based autoscaling rather than just Memory-based)
 * MemoryDB ACLs (commented out to avoid default bad practices, read comments to understand the CloudFormation)
 
 Features to come:

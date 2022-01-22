@@ -141,6 +141,7 @@ const redisDBProps: RedisDBProps = { ... }
 | [`terminationProtection`](#cdkredisdbredisdbpropspropertyterminationprotection) | `boolean` | Whether to enable termination protection for this stack. |
 | [`atRestEncryptionEnabled`](#cdkredisdbredisdbpropspropertyatrestencryptionenabled) | `boolean` \| [`aws-cdk-lib.IResolvable`](#aws-cdk-lib.IResolvable) | *No description.* |
 | [`engineVersion`](#cdkredisdbredisdbpropspropertyengineversion) | `string` | *No description.* |
+| [`existingSecurityGroup`](#cdkredisdbredisdbpropspropertyexistingsecuritygroup) | [`aws-cdk-lib.aws_ec2.ISecurityGroup`](#aws-cdk-lib.aws_ec2.ISecurityGroup) | *No description.* |
 | [`existingVpc`](#cdkredisdbredisdbpropspropertyexistingvpc) | [`aws-cdk-lib.aws_ec2.IVpc`](#aws-cdk-lib.aws_ec2.IVpc) | *No description.* |
 | [`memoryAutoscalingTarget`](#cdkredisdbredisdbpropspropertymemoryautoscalingtarget) | `number` | *No description.* |
 | [`nodes`](#cdkredisdbredisdbpropspropertynodes) | `number` | *No description.* |
@@ -262,6 +263,16 @@ public readonly engineVersion: string;
 ```
 
 - *Type:* `string`
+
+---
+
+##### `existingSecurityGroup`<sup>Optional</sup> <a name="cdk-redisdb.RedisDBProps.property.existingSecurityGroup" id="cdkredisdbredisdbpropspropertyexistingsecuritygroup"></a>
+
+```typescript
+public readonly existingSecurityGroup: ISecurityGroup;
+```
+
+- *Type:* [`aws-cdk-lib.aws_ec2.ISecurityGroup`](#aws-cdk-lib.aws_ec2.ISecurityGroup)
 
 ---
 

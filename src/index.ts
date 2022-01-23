@@ -20,6 +20,7 @@ export interface RedisDBProps extends StackProps {
   readonly nodes?: number;
   readonly nodeType?: string;
   readonly replicas?: number;
+  readonly authToken?: string;
 }
 
 function setupVpc(parent: any, props: RedisDBProps) : ec2.IVpc {
@@ -79,6 +80,7 @@ export class RedisDB extends Construct {
       atRestEncryptionEnabled: props.atRestEncryptionEnabled,
       transitEncryptionEnabled: props.transitEncryptionEnabled,
       replicasPerNodeGroup: props.replicas || 0,
+      authToken: props.authToken,
     });
     this.replicationGroup = redis_cluster;
     redis_cluster.node.addDependency(ecSubnetGroup);

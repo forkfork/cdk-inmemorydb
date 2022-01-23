@@ -140,6 +140,7 @@ const redisDBProps: RedisDBProps = { ... }
 | [`tags`](#cdkredisdbredisdbpropspropertytags) | {[ key: string ]: `string`} | Stack tags that will be applied to all the taggable resources and the stack itself. |
 | [`terminationProtection`](#cdkredisdbredisdbpropspropertyterminationprotection) | `boolean` | Whether to enable termination protection for this stack. |
 | [`atRestEncryptionEnabled`](#cdkredisdbredisdbpropspropertyatrestencryptionenabled) | `boolean` \| [`aws-cdk-lib.IResolvable`](#aws-cdk-lib.IResolvable) | *No description.* |
+| [`authToken`](#cdkredisdbredisdbpropspropertyauthtoken) | `string` | *No description.* |
 | [`engineVersion`](#cdkredisdbredisdbpropspropertyengineversion) | `string` | *No description.* |
 | [`existingSecurityGroup`](#cdkredisdbredisdbpropspropertyexistingsecuritygroup) | [`aws-cdk-lib.aws_ec2.ISecurityGroup`](#aws-cdk-lib.aws_ec2.ISecurityGroup) | *No description.* |
 | [`existingVpc`](#cdkredisdbredisdbpropspropertyexistingvpc) | [`aws-cdk-lib.aws_ec2.IVpc`](#aws-cdk-lib.aws_ec2.IVpc) | *No description.* |
@@ -253,6 +254,16 @@ public readonly atRestEncryptionEnabled: boolean | IResolvable;
 ```
 
 - *Type:* `boolean` | [`aws-cdk-lib.IResolvable`](#aws-cdk-lib.IResolvable)
+
+---
+
+##### `authToken`<sup>Optional</sup> <a name="cdk-redisdb.RedisDBProps.property.authToken" id="cdkredisdbredisdbpropspropertyauthtoken"></a>
+
+```typescript
+public readonly authToken: string;
+```
+
+- *Type:* `string`
 
 ---
 

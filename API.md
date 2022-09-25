@@ -141,7 +141,6 @@ const redisDBProps: RedisDBProps = { ... }
 | [`terminationProtection`](#cdkredisdbredisdbpropspropertyterminationprotection) | `boolean` | Whether to enable termination protection for this stack. |
 | [`atRestEncryptionEnabled`](#cdkredisdbredisdbpropspropertyatrestencryptionenabled) | `boolean` \| [`aws-cdk-lib.IResolvable`](#aws-cdk-lib.IResolvable) | *No description.* |
 | [`authToken`](#cdkredisdbredisdbpropspropertyauthtoken) | `string` | *No description.* |
-| [`cacheSubnetGroupName`](#cdkredisdbredisdbpropspropertycachesubnetgroupname) | `string` | *No description.* |
 | [`engineVersion`](#cdkredisdbredisdbpropspropertyengineversion) | `string` | *No description.* |
 | [`existingSecurityGroup`](#cdkredisdbredisdbpropspropertyexistingsecuritygroup) | [`aws-cdk-lib.aws_ec2.ISecurityGroup`](#aws-cdk-lib.aws_ec2.ISecurityGroup) | *No description.* |
 | [`existingVpc`](#cdkredisdbredisdbpropspropertyexistingvpc) | [`aws-cdk-lib.aws_ec2.IVpc`](#aws-cdk-lib.aws_ec2.IVpc) | *No description.* |
@@ -151,6 +150,7 @@ const redisDBProps: RedisDBProps = { ... }
 | [`nodeType`](#cdkredisdbredisdbpropspropertynodetype) | `string` | *No description.* |
 | [`replicas`](#cdkredisdbredisdbpropspropertyreplicas) | `number` | *No description.* |
 | [`replicasCpuAutoscalingTarget`](#cdkredisdbredisdbpropspropertyreplicascpuautoscalingtarget) | `number` | *No description.* |
+| [`subnetGroupName`](#cdkredisdbredisdbpropspropertysubnetgroupname) | `string` | *No description.* |
 | [`transitEncryptionEnabled`](#cdkredisdbredisdbpropspropertytransitencryptionenabled) | `boolean` \| [`aws-cdk-lib.IResolvable`](#aws-cdk-lib.IResolvable) | *No description.* |
 
 ---
@@ -268,16 +268,6 @@ public readonly authToken: string;
 
 ---
 
-##### `cacheSubnetGroupName`<sup>Optional</sup> <a name="cdk-redisdb.RedisDBProps.property.cacheSubnetGroupName" id="cdkredisdbredisdbpropspropertycachesubnetgroupname"></a>
-
-```typescript
-public readonly cacheSubnetGroupName: string;
-```
-
-- *Type:* `string`
-
----
-
 ##### `engineVersion`<sup>Optional</sup> <a name="cdk-redisdb.RedisDBProps.property.engineVersion" id="cdkredisdbredisdbpropspropertyengineversion"></a>
 
 ```typescript
@@ -365,6 +355,16 @@ public readonly replicasCpuAutoscalingTarget: number;
 ```
 
 - *Type:* `number`
+
+---
+
+##### `subnetGroupName`<sup>Optional</sup> <a name="cdk-redisdb.RedisDBProps.property.subnetGroupName" id="cdkredisdbredisdbpropspropertysubnetgroupname"></a>
+
+```typescript
+public readonly subnetGroupName: string;
+```
+
+- *Type:* `string`
 
 ---
 

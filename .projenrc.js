@@ -9,7 +9,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
 
   deps: [], /* Runtime dependencies of this module. */
   description: 'Simple & featureful Redis on AWS - Elasticache Replication Group & MemoryDB with a unified API',
-  // devDeps: [],             /* Build dependencies for this module. */
+  devDeps: [
+    '@types/prettier@2.4.4',
+  ], /* Build dependencies for this module. */
   packageName: 'cdk-redisdb', /* The "name" in package.json. */
 });
 project.synth();

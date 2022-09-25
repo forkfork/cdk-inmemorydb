@@ -13,5 +13,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@types/prettier@2.4.4',
   ], /* Build dependencies for this module. */
   packageName: 'cdk-redisdb', /* The "name" in package.json. */
+  publishToPypi: {
+    distName: 'cdk-redisdb',
+    module: 'cdk_redisdb',
+  },
 });
 project.synth();

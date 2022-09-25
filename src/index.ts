@@ -21,6 +21,7 @@ export interface RedisDBProps extends StackProps {
   readonly nodeType?: string;
   readonly replicas?: number;
   readonly authToken?: string;
+  readonly cacheSubnetGroupName?: string;
 }
 
 function setupVpc(parent: any, props: RedisDBProps) : ec2.IVpc {
@@ -63,7 +64,7 @@ export class RedisDB extends Construct {
     const ecSubnetGroup = new elasticache.CfnSubnetGroup(this, id + '-RedisDB-SubnetGroup', {
       description: 'RedisDB Subnet Group',
       subnetIds: isolatedSubnets,
-      cacheSubnetGroupName: 'RedisDBSubnetGroup',
+      cacheSubnetGroupName: props.cacheSubnetGroupName || 'RedisDBSubnetGroup',
     });
     let elasticacheReplicationGroupName = id + '-RedisDB';
     let redis_cluster = new elasticache.CfnReplicationGroup(this, elasticacheReplicationGroupName, {

@@ -141,6 +141,7 @@ const redisDBProps: RedisDBProps = { ... }
 | [`terminationProtection`](#cdkredisdbredisdbpropspropertyterminationprotection) | `boolean` | Whether to enable termination protection for this stack. |
 | [`atRestEncryptionEnabled`](#cdkredisdbredisdbpropspropertyatrestencryptionenabled) | `boolean` \| [`aws-cdk-lib.IResolvable`](#aws-cdk-lib.IResolvable) | *No description.* |
 | [`authToken`](#cdkredisdbredisdbpropspropertyauthtoken) | `string` | *No description.* |
+| [`cacheSubnetGroupName`](#cdkredisdbredisdbpropspropertycachesubnetgroupname) | `string` | *No description.* |
 | [`engineVersion`](#cdkredisdbredisdbpropspropertyengineversion) | `string` | *No description.* |
 | [`existingSecurityGroup`](#cdkredisdbredisdbpropspropertyexistingsecuritygroup) | [`aws-cdk-lib.aws_ec2.ISecurityGroup`](#aws-cdk-lib.aws_ec2.ISecurityGroup) | *No description.* |
 | [`existingVpc`](#cdkredisdbredisdbpropspropertyexistingvpc) | [`aws-cdk-lib.aws_ec2.IVpc`](#aws-cdk-lib.aws_ec2.IVpc) | *No description.* |
@@ -261,6 +262,16 @@ public readonly atRestEncryptionEnabled: boolean | IResolvable;
 
 ```typescript
 public readonly authToken: string;
+```
+
+- *Type:* `string`
+
+---
+
+##### `cacheSubnetGroupName`<sup>Optional</sup> <a name="cdk-redisdb.RedisDBProps.property.cacheSubnetGroupName" id="cdkredisdbredisdbpropspropertycachesubnetgroupname"></a>
+
+```typescript
+public readonly cacheSubnetGroupName: string;
 ```
 
 - *Type:* `string`

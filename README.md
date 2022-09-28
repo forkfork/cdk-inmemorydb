@@ -33,7 +33,7 @@ new MemoryDB(this, 'memorydb-repl-group', {
   nodes: 1,
   nodeType: 'db.t4g.small',
   engineVersion: '6.2',
-}
+})
 ```
 
 Specify a VPC rather than having a VPC auto-created for you:

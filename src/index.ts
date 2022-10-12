@@ -11,7 +11,6 @@ import { Construct } from 'constructs';
 export interface RedisDBProps extends StackProps {
   readonly existingVpc?: ec2.IVpc;
   readonly existingSecurityGroup?: ec2.ISecurityGroup;
-  readonly existingSubnetGroupName?: string;
   readonly atRestEncryptionEnabled?: boolean | IResolvable;
   readonly transitEncryptionEnabled?: boolean | IResolvable;
   readonly engineVersion?: string;
@@ -62,7 +61,7 @@ export class RedisDB extends Construct {
       description: 'SecurityGroup associated with RedisDB Cluster ' + id,
       allowAllOutbound: false,
     });
-    const ecSubnetGroup = props.existingSubnetGroupName ?? new elasticache.CfnSubnetGroup(this, id + '-RedisDB-SubnetGroup', {
+    const ecSubnetGroup = new elasticache.CfnSubnetGroup(this, id + '-RedisDB-SubnetGroup', {
       description: 'RedisDB Subnet Group',
       subnetIds: isolatedSubnets,
       cacheSubnetGroupName: props.subnetGroupName || 'RedisDBSubnetGroup',
@@ -76,7 +75,7 @@ export class RedisDB extends Construct {
       autoMinorVersionUpgrade: false,
       cacheParameterGroupName: 'default.redis6.x.cluster.on',
       engineVersion: props.engineVersion ?? '6.x',
-      cacheSubnetGroupName: props.existingSubnetGroupName ?? ecSubnetGroup.cacheSubnetGroupName,
+      cacheSubnetGroupName: ecSubnetGroup.cacheSubnetGroupName,
       securityGroupIds: [ecSecurityGroup.securityGroupId],
       replicationGroupDescription: 'RedisDB setup by CDK',
       atRestEncryptionEnabled: props.atRestEncryptionEnabled,
@@ -85,9 +84,7 @@ export class RedisDB extends Construct {
       authToken: props.authToken,
     });
     this.replicationGroup = redis_cluster;
-    if (!props.existingSubnetGroupName) {
-      redis_cluster.node.addDependency(ecSubnetGroup);
-    }
+    redis_cluster.node.addDependency(ecSubnetGroup);
     if (typeof props.memoryAutoscalingTarget == 'number') {
       const target = new appscaling.ScalableTarget(this, 'ScalableTarget', {
         serviceNamespace: appscaling.ServiceNamespace.ELASTICACHE,
@@ -142,7 +139,7 @@ export class MemoryDB extends Construct {
       description: 'SecurityGroup associated with RedisDB Cluster ' + id,
       allowAllOutbound: false,
     });
-    const ecSubnetGroup = props.existingSubnetGroupName ?? new memorydb.CfnSubnetGroup(this, id + '-RedisDB-SubnetGroup', {
+    const ecSubnetGroup = new memorydb.CfnSubnetGroup(this, id + '-RedisDB-SubnetGroup', {
       description: 'RedisDB Subnet Group',
       subnetIds: isolatedSubnets,
       subnetGroupName: props.subnetGroupName || 'memorydbsubnetgroup',
@@ -170,12 +167,10 @@ export class MemoryDB extends Construct {
       numShards: props.nodes||1,
       numReplicasPerShard: props.replicas||0,
       securityGroupIds: [ecSecurityGroup.securityGroupId],
-      subnetGroupName: props.existingSubnetGroupName ?? ecSubnetGroup.subnetGroupName,
+      subnetGroupName: ecSubnetGroup.subnetGroupName,
       tlsEnabled: true,
     });
-    if (!props.existingSubnetGroupName) {
-      memorydb_cluster.node.addDependency(ecSubnetGroup);;
-    }
+    memorydb_cluster.node.addDependency(ecSubnetGroup);
     this.cluster = memorydb_cluster;
     //memorydb_cluster.node.addDependency(cfnACL);
     //cfnACL.node.addDependency(cfnUser);

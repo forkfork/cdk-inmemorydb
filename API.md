@@ -143,6 +143,7 @@ const redisDBProps: RedisDBProps = { ... }
 | [`authToken`](#cdkredisdbredisdbpropspropertyauthtoken) | `string` | *No description.* |
 | [`engineVersion`](#cdkredisdbredisdbpropspropertyengineversion) | `string` | *No description.* |
 | [`existingSecurityGroup`](#cdkredisdbredisdbpropspropertyexistingsecuritygroup) | [`aws-cdk-lib.aws_ec2.ISecurityGroup`](#aws-cdk-lib.aws_ec2.ISecurityGroup) | *No description.* |
+| [`existingSubnetGroupName`](#cdkredisdbredisdbpropspropertyexistingsubnetgroupname) | `string` | *No description.* |
 | [`existingVpc`](#cdkredisdbredisdbpropspropertyexistingvpc) | [`aws-cdk-lib.aws_ec2.IVpc`](#aws-cdk-lib.aws_ec2.IVpc) | *No description.* |
 | [`memoryAutoscalingTarget`](#cdkredisdbredisdbpropspropertymemoryautoscalingtarget) | `number` | *No description.* |
 | [`nodes`](#cdkredisdbredisdbpropspropertynodes) | `number` | *No description.* |
@@ -285,6 +286,16 @@ public readonly existingSecurityGroup: ISecurityGroup;
 ```
 
 - *Type:* [`aws-cdk-lib.aws_ec2.ISecurityGroup`](#aws-cdk-lib.aws_ec2.ISecurityGroup)
+
+---
+
+##### `existingSubnetGroupName`<sup>Optional</sup> <a name="cdk-redisdb.RedisDBProps.property.existingSubnetGroupName" id="cdkredisdbredisdbpropspropertyexistingsubnetgroupname"></a>
+
+```typescript
+public readonly existingSubnetGroupName: string;
+```
+
+- *Type:* `string`
 
 ---
 

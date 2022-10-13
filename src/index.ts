@@ -11,6 +11,7 @@ import { Construct } from 'constructs';
 export interface RedisDBProps extends StackProps {
   readonly existingVpc?: ec2.IVpc;
   readonly existingSecurityGroup?: ec2.ISecurityGroup;
+  readonly existingSubnetGroupName?: string;
   readonly atRestEncryptionEnabled?: boolean | IResolvable;
   readonly transitEncryptionEnabled?: boolean | IResolvable;
   readonly engineVersion?: string;
@@ -61,11 +62,19 @@ export class RedisDB extends Construct {
       description: 'SecurityGroup associated with RedisDB Cluster ' + id,
       allowAllOutbound: false,
     });
-    const ecSubnetGroup = new elasticache.CfnSubnetGroup(this, id + '-RedisDB-SubnetGroup', {
-      description: 'RedisDB Subnet Group',
-      subnetIds: isolatedSubnets,
-      cacheSubnetGroupName: props.subnetGroupName || 'RedisDBSubnetGroup',
-    });
+    let groupName: string;
+    let ecSubnetGroup: elasticache.CfnSubnetGroup;
+    if (!props.existingSubnetGroupName) {
+      ecSubnetGroup = new elasticache.CfnSubnetGroup(this, id + '-RedisDB-SubnetGroup', {
+        description: 'RedisDB Subnet Group',
+        subnetIds: isolatedSubnets,
+        cacheSubnetGroupName: props.subnetGroupName || 'RedisDBSubnetGroup',
+      });
+      groupName = ecSubnetGroup.cacheSubnetGroupName!;
+    } else {
+      groupName = props.existingSubnetGroupName!;
+    }
+
     let elasticacheReplicationGroupName = id + '-RedisDB';
     let redis_cluster = new elasticache.CfnReplicationGroup(this, elasticacheReplicationGroupName, {
       numNodeGroups: props.nodes || 1,
@@ -75,7 +84,7 @@ export class RedisDB extends Construct {
       autoMinorVersionUpgrade: false,
       cacheParameterGroupName: 'default.redis6.x.cluster.on',
       engineVersion: props.engineVersion ?? '6.x',
-      cacheSubnetGroupName: ecSubnetGroup.cacheSubnetGroupName,
+      cacheSubnetGroupName: groupName,
       securityGroupIds: [ecSecurityGroup.securityGroupId],
       replicationGroupDescription: 'RedisDB setup by CDK',
       atRestEncryptionEnabled: props.atRestEncryptionEnabled,
@@ -84,7 +93,9 @@ export class RedisDB extends Construct {
       authToken: props.authToken,
     });
     this.replicationGroup = redis_cluster;
-    redis_cluster.node.addDependency(ecSubnetGroup);
+    if (!props.existingSubnetGroupName) {
+      redis_cluster.node.addDependency(ecSubnetGroup!);
+    }
     if (typeof props.memoryAutoscalingTarget == 'number') {
       const target = new appscaling.ScalableTarget(this, 'ScalableTarget', {
         serviceNamespace: appscaling.ServiceNamespace.ELASTICACHE,
@@ -139,11 +150,18 @@ export class MemoryDB extends Construct {
       description: 'SecurityGroup associated with RedisDB Cluster ' + id,
       allowAllOutbound: false,
     });
-    const ecSubnetGroup = new memorydb.CfnSubnetGroup(this, id + '-RedisDB-SubnetGroup', {
-      description: 'RedisDB Subnet Group',
-      subnetIds: isolatedSubnets,
-      subnetGroupName: props.subnetGroupName || 'memorydbsubnetgroup',
-    });
+    let groupName: string;
+    let ecSubnetGroup: memorydb.CfnSubnetGroup;
+    if (!props.existingSubnetGroupName) {
+      ecSubnetGroup = new memorydb.CfnSubnetGroup(this, id + '-RedisDB-SubnetGroup', {
+        description: 'RedisDB Subnet Group',
+        subnetIds: isolatedSubnets,
+        subnetGroupName: props.subnetGroupName || 'memorydbsubnetgroup',
+      });
+      groupName = ecSubnetGroup.subnetGroupName!;
+    } else {
+      groupName = props.existingSubnetGroupName!;
+    }
 
     /*
     const cfnUser = new memorydb.CfnUser(this, 'memorydb-user', {
@@ -167,10 +185,12 @@ export class MemoryDB extends Construct {
       numShards: props.nodes||1,
       numReplicasPerShard: props.replicas||0,
       securityGroupIds: [ecSecurityGroup.securityGroupId],
-      subnetGroupName: ecSubnetGroup.subnetGroupName,
+      subnetGroupName: groupName,
       tlsEnabled: true,
     });
-    memorydb_cluster.node.addDependency(ecSubnetGroup);
+    if (!props.existingSubnetGroupName) {
+      memorydb_cluster.node.addDependency(ecSubnetGroup!);
+    }
     this.cluster = memorydb_cluster;
     //memorydb_cluster.node.addDependency(cfnACL);
     //cfnACL.node.addDependency(cfnUser);

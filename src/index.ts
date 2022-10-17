@@ -15,6 +15,7 @@ export interface RedisDBProps extends StackProps {
   readonly atRestEncryptionEnabled?: boolean | IResolvable;
   readonly transitEncryptionEnabled?: boolean | IResolvable;
   readonly engineVersion?: string;
+  readonly parameterGroupName?: string;
   readonly memoryAutoscalingTarget?: number;
   readonly replicasCpuAutoscalingTarget?: number;
   readonly nodesCpuAutoscalingTarget?: number;
@@ -82,7 +83,7 @@ export class RedisDB extends Construct {
       engine: 'Redis',
       multiAzEnabled: false,
       autoMinorVersionUpgrade: false,
-      cacheParameterGroupName: 'default.redis6.x.cluster.on',
+      cacheParameterGroupName: props.parameterGroupName ?? 'default.redis6.x.cluster.on',
       engineVersion: props.engineVersion ?? '6.x',
       cacheSubnetGroupName: groupName,
       securityGroupIds: [ecSecurityGroup.securityGroupId],

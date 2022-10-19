@@ -149,6 +149,7 @@ const redisDBProps: RedisDBProps = { ... }
 | [`nodes`](#cdkredisdbredisdbpropspropertynodes) | `number` | *No description.* |
 | [`nodesCpuAutoscalingTarget`](#cdkredisdbredisdbpropspropertynodescpuautoscalingtarget) | `number` | *No description.* |
 | [`nodeType`](#cdkredisdbredisdbpropspropertynodetype) | `string` | *No description.* |
+| [`parameterGroupName`](#cdkredisdbredisdbpropspropertyparametergroupname) | `string` | *No description.* |
 | [`replicas`](#cdkredisdbredisdbpropspropertyreplicas) | `number` | *No description.* |
 | [`replicasCpuAutoscalingTarget`](#cdkredisdbredisdbpropspropertyreplicascpuautoscalingtarget) | `number` | *No description.* |
 | [`subnetGroupName`](#cdkredisdbredisdbpropspropertysubnetgroupname) | `string` | *No description.* |
@@ -343,6 +344,16 @@ public readonly nodesCpuAutoscalingTarget: number;
 
 ```typescript
 public readonly nodeType: string;
+```
+
+- *Type:* `string`
+
+---
+
+##### `parameterGroupName`<sup>Optional</sup> <a name="cdk-redisdb.RedisDBProps.property.parameterGroupName" id="cdkredisdbredisdbpropspropertyparametergroupname"></a>
+
+```typescript
+public readonly parameterGroupName: string;
 ```
 
 - *Type:* `string`

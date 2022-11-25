@@ -37,7 +37,7 @@ function setupVpc(parent: any, props: RedisDBProps) : ec2.IVpc {
       {
         cidrMask: 24,
         name: 'Isolated Subnet',
-        subnetType: ec2.SubnetType.ISOLATED,
+        subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
       },
     ],
   });

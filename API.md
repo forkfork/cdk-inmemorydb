@@ -133,6 +133,7 @@ const redisDBProps: RedisDBProps = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | [`analyticsReporting`](#cdkredisdbredisdbpropspropertyanalyticsreporting) | `boolean` | Include runtime versioning information in this Stack. |
+| [`crossRegionReferences`](#cdkredisdbredisdbpropspropertycrossregionreferences) | `boolean` | Enable this flag to allow native cross region stack references. |
 | [`description`](#cdkredisdbredisdbpropspropertydescription) | `string` | A description of the stack. |
 | [`env`](#cdkredisdbredisdbpropspropertyenv) | [`aws-cdk-lib.Environment`](#aws-cdk-lib.Environment) | The AWS environment (account/region) where this stack will be deployed. |
 | [`stackName`](#cdkredisdbredisdbpropspropertystackname) | `string` | Name to deploy the stack with. |
@@ -167,6 +168,21 @@ public readonly analyticsReporting: boolean;
 - *Default:* `analyticsReporting` setting of containing `App`, or value of 'aws:cdk:version-reporting' context key
 
 Include runtime versioning information in this Stack.
+
+---
+
+##### `crossRegionReferences`<sup>Optional</sup> <a name="cdk-redisdb.RedisDBProps.property.crossRegionReferences" id="cdkredisdbredisdbpropspropertycrossregionreferences"></a>
+
+```typescript
+public readonly crossRegionReferences: boolean;
+```
+
+- *Type:* `boolean`
+- *Default:* false
+
+Enable this flag to allow native cross region stack references.
+
+Enabling this will create a CloudFormation custom resource in both the producing stack and consuming stack in order to perform the export/import  This feature is currently experimental
 
 ---
 

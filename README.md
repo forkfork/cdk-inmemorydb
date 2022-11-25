@@ -50,7 +50,7 @@ let vpc = new ec2.Vpc(this, 'Vpc', {
     {
       cidrMask: 24,
       name: 'isolated1',
-      subnetType: ec2.SubnetType.ISOLATED,
+      subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
     },
   ],
 })

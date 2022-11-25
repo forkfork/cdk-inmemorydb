@@ -1,8 +1,7 @@
 # cdk-redisdb
 
-An AWS CDK construct which spins up an Elasticache Replication Group, or a MemoryDB Cluster. API still in flux as in fairly early development - pin against a specific version.
+An AWS CDK construct which spins up an Elasticache Replication Group, or a MemoryDB Cluster. 
 
-__SECURITY NOTE__: This construct is still in development, please carefully review the resources created before using this in production.
 
 ## Usage (TypeScript/JavaScript)
 
@@ -71,6 +70,7 @@ new RedisDB(this, 'redisdb-repl-group', {
   replicas: 2, // 2 replicas per node
   nodeType: 'cache.m6g.large',
   memoryAutoscalingTarget: 60,
+  // nodesCpuAutoscalingTarget
 })
 ```
 

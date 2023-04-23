@@ -83,7 +83,7 @@ export class RedisDB extends Construct {
       engine: 'Redis',
       multiAzEnabled: false,
       autoMinorVersionUpgrade: false,
-      cacheParameterGroupName: props.parameterGroupName ?? 'default.redis7.0.cluster.on',
+      cacheParameterGroupName: props.parameterGroupName ?? 'default.redis7.cluster.on',
       engineVersion: props.engineVersion ?? '7.0',
       cacheSubnetGroupName: groupName,
       securityGroupIds: [ecSecurityGroup.securityGroupId],

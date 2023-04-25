@@ -45,11 +45,13 @@ function setupVpc(parent: any, props: RedisDBProps) : ec2.IVpc {
 
 export class RedisDB extends Construct {
   public readonly replicationGroup : elasticache.CfnReplicationGroup;
+  public readonly vpc : ec2.IVpc;
   constructor(scope: Construct, id: string, props: RedisDBProps = {}) {
     super(scope, id);
 
     let isolatedSubnets: string[] = [];
     let redisVpc = setupVpc(this, props);
+    this.vpc = redisVpc;
     redisVpc.isolatedSubnets.forEach(function(value) {
       isolatedSubnets.push(value.subnetId);
     });
@@ -139,10 +141,12 @@ export class RedisDB extends Construct {
 
 export class MemoryDB extends Construct {
   public readonly cluster : memorydb.CfnCluster;
+  public readonly vpc : ec2.IVpc;
   constructor(scope: Construct, id: string, props: RedisDBProps = {}) {
     super(scope, id);
     let isolatedSubnets: string[] = [];
     let redisVpc = setupVpc(this, props);
+    this.vpc = redisVpc;
     redisVpc.isolatedSubnets.forEach(function(value) {
       isolatedSubnets.push(value.subnetId);
     });

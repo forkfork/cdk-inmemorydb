@@ -204,6 +204,7 @@ Any object.
 | --- | --- | --- |
 | <code><a href="#cdk-redisdb.MemoryDB.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
 | <code><a href="#cdk-redisdb.MemoryDB.property.cluster">cluster</a></code> | <code>aws-cdk-lib.aws_memorydb.CfnCluster</code> | *No description.* |
+| <code><a href="#cdk-redisdb.MemoryDB.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | *No description.* |
 
 ---
 
@@ -226,6 +227,16 @@ public readonly cluster: CfnCluster;
 ```
 
 - *Type:* aws-cdk-lib.aws_memorydb.CfnCluster
+
+---
+
+##### `vpc`<sup>Required</sup> <a name="vpc" id="cdk-redisdb.MemoryDB.property.vpc"></a>
+
+```typescript
+public readonly vpc: IVpc;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.IVpc
 
 ---
 
@@ -314,6 +325,7 @@ Any object.
 | --- | --- | --- |
 | <code><a href="#cdk-redisdb.RedisDB.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
 | <code><a href="#cdk-redisdb.RedisDB.property.replicationGroup">replicationGroup</a></code> | <code>aws-cdk-lib.aws_elasticache.CfnReplicationGroup</code> | *No description.* |
+| <code><a href="#cdk-redisdb.RedisDB.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | *No description.* |
 
 ---
 
@@ -336,6 +348,16 @@ public readonly replicationGroup: CfnReplicationGroup;
 ```
 
 - *Type:* aws-cdk-lib.aws_elasticache.CfnReplicationGroup
+
+---
+
+##### `vpc`<sup>Required</sup> <a name="vpc" id="cdk-redisdb.RedisDB.property.vpc"></a>
+
+```typescript
+public readonly vpc: IVpc;
+```
+
+- *Type:* aws-cdk-lib.aws_ec2.IVpc
 
 ---
 

@@ -60,6 +60,11 @@ export class RedisDB extends Construct {
         isolatedSubnets.push(value.subnetId);
       });
     }
+    if (isolatedSubnets.length == 0) {
+      redisVpc.publicSubnets.forEach(function(value) {
+        isolatedSubnets.push(value.subnetId);
+      });
+    }
     const ecSecurityGroup = props.existingSecurityGroup ?? new ec2.SecurityGroup(this, id + '-RedisDB-SG', {
       vpc: redisVpc,
       description: 'SecurityGroup associated with RedisDB Cluster ' + id,
@@ -150,6 +155,16 @@ export class MemoryDB extends Construct {
     redisVpc.isolatedSubnets.forEach(function(value) {
       isolatedSubnets.push(value.subnetId);
     });
+    if (isolatedSubnets.length == 0) {
+      redisVpc.privateSubnets.forEach(function(value) {
+        isolatedSubnets.push(value.subnetId);
+      });
+    }
+    if (isolatedSubnets.length == 0) {
+      redisVpc.publicSubnets.forEach(function(value) {
+        isolatedSubnets.push(value.subnetId);
+      });
+    }
     const ecSecurityGroup = props.existingSecurityGroup ?? new ec2.SecurityGroup(this, id + '-RedisDB-SG', {
       vpc: redisVpc,
       description: 'SecurityGroup associated with RedisDB Cluster ' + id,

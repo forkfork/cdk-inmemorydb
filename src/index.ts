@@ -8,7 +8,7 @@ import {
 } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
-export interface RedisDBProps {
+export interface RedisDBProps extends StackProps {
   readonly existingVpc?: ec2.IVpc;
   readonly existingSecurityGroup?: ec2.ISecurityGroup;
   readonly existingSubnetGroupName?: string;

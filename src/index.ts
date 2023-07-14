@@ -24,6 +24,7 @@ export interface RedisDBProps extends StackProps {
   readonly replicas?: number;
   readonly authToken?: string;
   readonly subnetGroupName?: string;
+  readonly port?: number;
 }
 
 function setupVpc(parent: any, props: RedisDBProps) : ec2.IVpc {
@@ -99,6 +100,7 @@ export class RedisDB extends Construct {
       transitEncryptionEnabled: props.transitEncryptionEnabled,
       replicasPerNodeGroup: props.replicas || 0,
       authToken: props.authToken,
+      port: props.port || 6379,
     });
     this.replicationGroup = redis_cluster;
     if (!props.existingSubnetGroupName) {
@@ -207,6 +209,7 @@ export class MemoryDB extends Construct {
       securityGroupIds: [ecSecurityGroup.securityGroupId],
       subnetGroupName: groupName,
       tlsEnabled: true,
+      port: props.port || 6379,
     });
     if (!props.existingSubnetGroupName) {
       memorydb_cluster.node.addDependency(ecSubnetGroup!);

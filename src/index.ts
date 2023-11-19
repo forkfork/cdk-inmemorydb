@@ -208,7 +208,7 @@ export class MemoryDB extends Construct {
       numReplicasPerShard: props.replicas||0,
       securityGroupIds: [ecSecurityGroup.securityGroupId],
       subnetGroupName: groupName,
-      tlsEnabled: true,
+      tlsEnabled: props.transitEncryptionEnabled ?? true,
     });
     if (!props.existingSubnetGroupName) {
       memorydb_cluster.node.addDependency(ecSubnetGroup!);

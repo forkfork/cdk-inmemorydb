@@ -1,10 +1,10 @@
 import {
+  IResolvable,
+  StackProps,
+  aws_applicationautoscaling as appscaling,
+  aws_ec2 as ec2,
   aws_elasticache as elasticache,
   aws_memorydb as memorydb,
-  aws_ec2 as ec2,
-  aws_applicationautoscaling as appscaling,
-  StackProps,
-  IResolvable,
 } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
@@ -24,6 +24,7 @@ export interface RedisDBProps extends StackProps {
   readonly replicas?: number;
   readonly authToken?: string;
   readonly subnetGroupName?: string;
+  readonly elasticacheReplicationGroupId?: string;
 }
 
 function setupVpc(parent: any, props: RedisDBProps) : ec2.IVpc {
@@ -99,6 +100,7 @@ export class RedisDB extends Construct {
       transitEncryptionEnabled: props.transitEncryptionEnabled,
       replicasPerNodeGroup: props.replicas || 0,
       authToken: props.authToken,
+      globalReplicationGroupId: props.elasticacheReplicationGroupId,
     });
     this.replicationGroup = redis_cluster;
     if (!props.existingSubnetGroupName) {

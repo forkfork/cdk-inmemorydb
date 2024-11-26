@@ -1,6 +1,6 @@
 {
-  "name": "cdk-redisdb",
-  "description": "Simple & featureful Redis on AWS - Elasticache Replication Group & MemoryDB with a unified API",
+  "name": "cdk-inmemorydb",
+  "description": "Simple & featureful in-memory databases on AWS - Elasticache Replication Group & MemoryDB with a unified API",
   "repository": {
     "type": "git",
     "url": "https://github.com/forkfork/cdk-redisdb.git"
